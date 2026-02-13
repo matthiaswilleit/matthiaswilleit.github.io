@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0a1628;
+            --deep-blue: #1a2942;
+            --accent-blue: #2d4263;
+            --sand: #e8d5b7;
+            --light-sand: #f5ead8;
+            --warm-sand: #d4b896;
+            --text-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--navy);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--navy);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--sand);
+            border-radius: 5px;
+        }
+
+        /* Header/Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem 5%;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(232, 213, 183, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--sand);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light-sand);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--sand);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--sand);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(232, 213, 183, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--sand);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.5s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--light-sand);
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.7s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--sand);
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.9s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--warm-sand);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--sand);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--light-sand);
+            margin-bottom: 4rem;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--light-sand);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--deep-blue) 100%);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(232, 213, 183, 0.03) 10px,
+                rgba(232, 213, 183, 0.03) 20px
+            );
+        }
+
+        /* Video Portfolio Section */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .video-item {
+            position: relative;
+            background: var(--deep-blue);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(232, 213, 183, 0.1);
+        }
+
+        .video-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--deep-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--sand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-item:hover .play-icon {
+            transform: scale(1.1);
+        }
+
+        .play-icon::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid var(--navy);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 5px;
+        }
+
+        .video-info {
+            padding: 2rem;
+        }
+
+        .video-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--sand);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            color: var(--light-sand);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--deep-blue);
+            border-radius: 4px;
+            padding: 5rem;
+            margin-top: 4rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--sand);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            color: var(--light-sand);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--light-sand);
+        }
+
+        .contact-detail-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--sand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--sand);
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            background: var(--navy);
+            border: 1px solid rgba(232, 213, 183, 0.2);
+            border-radius: 2px;
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--sand);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            padding: 1rem 2.5rem;
+            background: var(--sand);
+            color: var(--navy);
+            border: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .submit-button:hover {
+            background: var(--warm-sand);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(232, 213, 183, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--deep-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sand);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            background: var(--sand);
+            color: var(--navy);
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            color: var(--light-sand);
+            opacity: 0.7;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--sand);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--navy);
+                padding: 2rem;
+                width: 250px;
+                height: calc(100vh - 80px);
+                transition: right 0.3s ease;
+                border-left: 1px solid rgba(232, 213, 183, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact {
+                padding: 3rem 2rem;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 1.5rem 5%;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+
+            .contact {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Intersection Observer Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Portfolio</div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Über mich</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-subtitle">Willkommen</div>
+            <h1>Kreativität<br>trifft Design</h1>
+            <p class="hero-description">
+                Ich verwandle Ideen in visuelle Erlebnisse. Mit Leidenschaft für Details 
+                und einem Auge für Ästhetik schaffe ich Projekte, die begeistern.
+            </p>
+            <a href="#portfolio" class="cta-button"><span>Meine Arbeiten</span></a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">Über mich</h2>
+        <p class="section-subtitle">Wer ich bin und was ich mache</p>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    Hallo! Ich bin ein kreativer Kopf mit einer Leidenschaft für visuelles Storytelling 
+                    und innovatives Design. Meine Arbeit verbindet technisches Know-how mit künstlerischer 
+                    Vision.
+                </p>
+                <p>
+                    Mit mehreren Jahren Erfahrung in der Branche habe ich gelernt, dass die besten 
+                    Projekte dort entstehen, wo Kreativität auf Strategie trifft. Jedes Projekt ist 
+                    für mich eine neue Chance, Grenzen zu verschieben und etwas Einzigartiges zu schaffen.
+                </p>
+                <p>
+                    Lass uns zusammenarbeiten und deine Vision zum Leben erwecken.
+                </p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- Video Portfolio Section -->
+    <section id="portfolio" class="fade-in">
+        <h2 class="section-title">Mein Portfolio</h2>
+        <p class="section-subtitle">Eine Auswahl meiner Arbeiten</p>
+        
+        <div class="video-grid">
+            <div class="video-item">
+                <div class="video-thumbnail">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Markenfilm 2024</h3>
+                    <p class="video-description">
+                        Ein emotionaler Markenfilm, der die Geschichte eines innovativen 
+                        Unternehmens erzählt und dessen Werte zum Leben erweckt.
+                    </p>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <div class="video-thumbnail">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Produktpräsentation</h3>
+                    <p class="video-description">
+                        Eine hochwertige Produktpräsentation mit fokus auf Details, Ästhetik 
+                        und die einzigartigen Features des Produkts.
+                    </p>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <div class="video-thumbnail">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Kreatives Konzept</h3>
+                    <p class="video-description">
+                        Ein experimentelles Videoprojekt, das konventionelle Grenzen 
+                        sprengt und neue visuelle Narrative erforscht.
+                    </p>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <div class="video-thumbnail">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Dokumentation</h3>
+                    <p class="video-description">
+                        Eine bewegende Dokumentation, die tiefe Einblicke gibt und 
+                        authentische Geschichten auf eindrucksvolle Weise erzählt.
+                    </p>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <div class="video-thumbnail">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Social Media Kampagne</h3>
+                    <p class="video-description">
+                        Dynamische Video-Inhalte für Social Media, optimiert für maximale 
+                        Reichweite und Engagement.
+                    </p>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <div class="video-thumbnail">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Event-Highlights</h3>
+                    <p class="video-description">
+                        Atmosphärische Event-Dokumentation, die die Energie und Stimmung 
+                        besonderer Momente einfängt.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Kontakt</h2>
+        <p class="section-subtitle">Lass uns über dein Projekt sprechen</p>
+        
+        <div class="contact">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Schreib mir</h3>
+                    <p>
+                        Hast du ein Projekt im Kopf? Ich freue mich darauf, von dir zu hören 
+                        und gemeinsam etwas Großartiges zu schaffen.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">@</div>
+                            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6801060e072818071a1c0e07040107460c0d">[email&#160;protected]</a></span>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">☎</div>
+                            <span>+49 123 456 7890</span>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">📍</div>
+                            <span>Berlin, Deutschland</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-Mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Nachricht</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Absenden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link">in</a>
+                <a href="#" class="social-link">ig</a>
+                <a href="#" class="social-link">yt</a>
+                <a href="#" class="social-link">fb</a>
+            </div>
+            <p>&copy; 2026 Portfolio. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Vielen Dank für deine Nachricht! Ich melde mich bald bei dir.');
+            event.target.reset();
+        }
+
+        // Intersection Observer for Fade-in Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scroll behavior for Safari
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Video play functionality (placeholder)
+        document.querySelectorAll('.video-item').forEach(item => {
+            item.addEventListen
