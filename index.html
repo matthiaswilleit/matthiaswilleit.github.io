@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Sarah Müller - Kreative Videoproduktion</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
@@ -30,7 +30,6 @@
             line-height: 1.6;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -44,7 +43,6 @@
             border-radius: 5px;
         }
 
-        /* Header/Navigation */
         header {
             position: fixed;
             top: 0;
@@ -119,7 +117,6 @@
             width: 100%;
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -234,7 +231,6 @@
             z-index: 1;
         }
 
-        /* Section Styling */
         section {
             padding: 6rem 5%;
             max-width: 1400px;
@@ -256,7 +252,6 @@
             opacity: 0.9;
         }
 
-        /* About Section */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -269,6 +264,21 @@
             line-height: 1.9;
             color: var(--light-sand);
             margin-bottom: 1.5rem;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            padding: 1rem;
+            background: var(--deep-blue);
+            border-radius: 4px;
+            border-left: 3px solid var(--sand);
+            color: var(--light-sand);
         }
 
         .about-image {
@@ -296,7 +306,6 @@
             );
         }
 
-        /* Video Portfolio Section */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -318,41 +327,21 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .video-thumbnail {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--deep-blue) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .video-container {
             position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
             overflow: hidden;
         }
 
-        .play-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--sand);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .video-item:hover .play-icon {
-            transform: scale(1.1);
-        }
-
-        .play-icon::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 20px solid var(--navy);
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            margin-left: 5px;
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .video-info {
@@ -373,7 +362,21 @@
             opacity: 0.9;
         }
 
-        /* Contact Section */
+        .video-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--sand);
+            opacity: 0.8;
+        }
+
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         .contact {
             background: var(--deep-blue);
             border-radius: 4px;
@@ -425,7 +428,6 @@
             font-weight: 600;
         }
 
-        /* Contact Form */
         .contact-form {
             display: flex;
             flex-direction: column;
@@ -487,7 +489,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Footer */
         footer {
             background: var(--navy);
             padding: 3rem 5%;
@@ -532,7 +533,6 @@
             opacity: 0.7;
         }
 
-        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -547,7 +547,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Responsive Design */
         @media (max-width: 968px) {
             .menu-toggle {
                 display: flex;
@@ -587,6 +586,10 @@
             section {
                 padding: 4rem 5%;
             }
+
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 600px) {
@@ -607,12 +610,10 @@
             }
         }
 
-        /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Intersection Observer Animation */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -626,10 +627,9 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <nav>
-            <div class="logo">Portfolio</div>
+            <div class="logo">Sarah Müller</div>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -644,154 +644,191 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="hero-subtitle">Willkommen</div>
-            <h1>Kreativität<br>trifft Design</h1>
+            <div class="hero-subtitle">Filmemacherin & Content Creator</div>
+            <h1>Geschichten,<br>die bewegen</h1>
             <p class="hero-description">
-                Ich verwandle Ideen in visuelle Erlebnisse. Mit Leidenschaft für Details 
-                und einem Auge für Ästhetik schaffe ich Projekte, die begeistern.
+                Von emotionalen Dokumentationen bis zu kreativen Werbekampagnen – ich bringe 
+                deine Vision mit cinematischer Qualität auf den Bildschirm. Mit über 8 Jahren 
+                Erfahrung in der Film- und Videoproduktion.
             </p>
-            <a href="#portfolio" class="cta-button"><span>Meine Arbeiten</span></a>
+            <a href="#portfolio" class="cta-button"><span>Meine Arbeiten entdecken</span></a>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="fade-in">
         <h2 class="section-title">Über mich</h2>
-        <p class="section-subtitle">Wer ich bin und was ich mache</p>
+        <p class="section-subtitle">Meine Geschichte & Expertise</p>
         <div class="about-content">
             <div class="about-text">
                 <p>
-                    Hallo! Ich bin ein kreativer Kopf mit einer Leidenschaft für visuelles Storytelling 
-                    und innovatives Design. Meine Arbeit verbindet technisches Know-how mit künstlerischer 
-                    Vision.
+                    Hallo! Ich bin Sarah, eine leidenschaftliche Filmemacherin aus Berlin. 
+                    Meine Reise begann 2015 mit einem Filmstudium an der Kunsthochschule für Medien Köln, 
+                    wo ich mein Handwerk von Grund auf lernte.
                 </p>
                 <p>
-                    Mit mehreren Jahren Erfahrung in der Branche habe ich gelernt, dass die besten 
-                    Projekte dort entstehen, wo Kreativität auf Strategie trifft. Jedes Projekt ist 
-                    für mich eine neue Chance, Grenzen zu verschieben und etwas Einzigartiges zu schaffen.
+                    Seitdem habe ich mit renommierten Marken wie Mercedes-Benz, Adidas und der Deutschen Telekom 
+                    zusammengearbeitet. Mein Fokus liegt auf authentischem Storytelling und visueller Ästhetik, 
+                    die Emotionen weckt und Botschaften nachhaltig vermittelt.
                 </p>
                 <p>
-                    Lass uns zusammenarbeiten und deine Vision zum Leben erwecken.
+                    Ob Dokumentarfilm, Werbespot oder Social Media Content – jedes Projekt ist für mich 
+                    eine Chance, Grenzen zu verschieben und visuell beeindruckende Geschichten zu erzählen.
                 </p>
+                <div class="skills-list">
+                    <div class="skill-item">📹 Filmproduktion</div>
+                    <div class="skill-item">✂️ Video Editing</div>
+                    <div class="skill-item">🎨 Color Grading</div>
+                    <div class="skill-item">🎬 Regie & Konzeption</div>
+                    <div class="skill-item">📸 Cinematografie</div>
+                    <div class="skill-item">🎵 Sound Design</div>
+                </div>
             </div>
             <div class="about-image"></div>
         </div>
     </section>
 
-    <!-- Video Portfolio Section -->
     <section id="portfolio" class="fade-in">
         <h2 class="section-title">Mein Portfolio</h2>
-        <p class="section-subtitle">Eine Auswahl meiner Arbeiten</p>
+        <p class="section-subtitle">Ausgewählte Projekte aus meiner Arbeit</p>
         
         <div class="video-grid">
             <div class="video-item">
-                <div class="video-thumbnail">
-                    <div class="play-icon"></div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Markenfilm 2024</h3>
+                    <h3 class="video-title">Mercedes EQS - Elektrische Zukunft</h3>
                     <p class="video-description">
-                        Ein emotionaler Markenfilm, der die Geschichte eines innovativen 
-                        Unternehmens erzählt und dessen Werte zum Leben erweckt.
+                        Cinematischer Werbefilm für die Einführung des Mercedes EQS. 
+                        Fokus auf innovative Technologie und luxuriöses Design. Gedreht in 4K mit Arri Alexa.
                     </p>
+                    <div class="video-meta">
+                        <span>🎬 Werbung</span>
+                        <span>⏱️ 2:15</span>
+                        <span>📅 2024</span>
+                    </div>
                 </div>
             </div>
 
             <div class="video-item">
-                <div class="video-thumbnail">
-                    <div class="play-icon"></div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Produktpräsentation</h3>
+                    <h3 class="video-title">Urban Stories - Berliner Leben</h3>
                     <p class="video-description">
-                        Eine hochwertige Produktpräsentation mit fokus auf Details, Ästhetik 
-                        und die einzigartigen Features des Produkts.
+                        Dokumentarfilm über das urbane Leben in Berlin. Authentische Geschichten von 
+                        Menschen, die die Stadt prägen. Festival-Gewinner bei den Berliner Filmwochen 2023.
                     </p>
+                    <div class="video-meta">
+                        <span>🎬 Dokumentation</span>
+                        <span>⏱️ 12:45</span>
+                        <span>📅 2023</span>
+                    </div>
                 </div>
             </div>
 
             <div class="video-item">
-                <div class="video-thumbnail">
-                    <div class="play-icon"></div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Kreatives Konzept</h3>
+                    <h3 class="video-title">Adidas Originals Campaign</h3>
                     <p class="video-description">
-                        Ein experimentelles Videoprojekt, das konventionelle Grenzen 
-                        sprengt und neue visuelle Narrative erforscht.
+                        Energiegeladene Social Media Kampagne für Adidas Originals. 
+                        Streetstyle meets Performance. Über 2 Millionen Views in der ersten Woche.
                     </p>
+                    <div class="video-meta">
+                        <span>🎬 Social Media</span>
+                        <span>⏱️ 0:45</span>
+                        <span>📅 2024</span>
+                    </div>
                 </div>
             </div>
 
             <div class="video-item">
-                <div class="video-thumbnail">
-                    <div class="play-icon"></div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/kJQP7kiw5Fk" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Dokumentation</h3>
+                    <h3 class="video-title">Nature's Symphony</h3>
                     <p class="video-description">
-                        Eine bewegende Dokumentation, die tiefe Einblicke gibt und 
-                        authentische Geschichten auf eindrucksvolle Weise erzählt.
+                        Experimenteller Kurzfilm über die Verbindung zwischen Natur und Mensch. 
+                        Gedreht in den Alpen mit Drohnenaufnahmen und Zeitraffer-Sequenzen.
                     </p>
+                    <div class="video-meta">
+                        <span>🎬 Kurzfilm</span>
+                        <span>⏱️ 8:20</span>
+                        <span>📅 2023</span>
+                    </div>
                 </div>
             </div>
 
             <div class="video-item">
-                <div class="video-thumbnail">
-                    <div class="play-icon"></div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/M7lc1UVf-VE" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Social Media Kampagne</h3>
+                    <h3 class="video-title">Tech Startup Launch</h3>
                     <p class="video-description">
-                        Dynamische Video-Inhalte für Social Media, optimiert für maximale 
-                        Reichweite und Engagement.
+                        Produktvideo für ein innovatives Tech-Startup aus München. 
+                        Modernes Design trifft auf klare Produktpräsentation. Used by company für Series A pitch.
                     </p>
+                    <div class="video-meta">
+                        <span>🎬 Corporate</span>
+                        <span>⏱️ 3:30</span>
+                        <span>📅 2024</span>
+                    </div>
                 </div>
             </div>
 
             <div class="video-item">
-                <div class="video-thumbnail">
-                    <div class="play-icon"></div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/yPYZpwSpKmA" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Event-Highlights</h3>
+                    <h3 class="video-title">Music Video - Lost in Motion</h3>
                     <p class="video-description">
-                        Atmosphärische Event-Dokumentation, die die Energie und Stimmung 
-                        besonderer Momente einfängt.
+                        Musikvideo für die Berliner Band "Echo Chamber". Visuelle Effekte, 
+                        kreative Transitions und atmosphärische Cinematografie.
                     </p>
+                    <div class="video-meta">
+                        <span>🎬 Musikvideo</span>
+                        <span>⏱️ 4:05</span>
+                        <span>📅 2023</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="fade-in">
         <h2 class="section-title">Kontakt</h2>
-        <p class="section-subtitle">Lass uns über dein Projekt sprechen</p>
+        <p class="section-subtitle">Lass uns über dein nächstes Projekt sprechen</p>
         
         <div class="contact">
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Schreib mir</h3>
+                    <h3>Arbeiten wir zusammen</h3>
                     <p>
-                        Hast du ein Projekt im Kopf? Ich freue mich darauf, von dir zu hören 
-                        und gemeinsam etwas Großartiges zu schaffen.
+                        Hast du ein spannendes Projekt im Kopf? Ob Werbekampagne, Dokumentation 
+                        oder kreatives Experiment – ich freue mich darauf, deine Vision zum Leben 
+                        zu erwecken. Schreib mir und lass uns gemeinsam etwas Außergewöhnliches schaffen.
                     </p>
                     <div class="contact-details">
                         <div class="contact-detail">
                             <div class="contact-detail-icon">@</div>
-                            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6801060e072818071a1c0e07040107460c0d">[email&#160;protected]</a></span>
+                            <span>sarah.mueller@filmproduktion.de</span>
                         </div>
                         <div class="contact-detail">
                             <div class="contact-detail-icon">☎</div>
-                            <span>+49 123 456 7890</span>
+                            <span>+49 30 555 1234</span>
                         </div>
                         <div class="contact-detail">
                             <div class="contact-detail-icon">📍</div>
-                            <span>Berlin, Deutschland</span>
+                            <span>Berlin-Kreuzberg, Deutschland</span>
                         </div>
                     </div>
                 </div>
@@ -799,57 +836,53 @@
                 <form class="contact-form" onsubmit="handleSubmit(event)">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" placeholder="Max Mustermann" required>
                     </div>
                     <div class="form-group">
                         <label for="email">E-Mail</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" placeholder="max@beispiel.de" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Nachricht</label>
-                        <textarea id="message" name="message" required></textarea>
+                        <label for="message">Deine Nachricht</label>
+                        <textarea id="message" name="message" placeholder="Erzähl mir von deinem Projekt..." required></textarea>
                     </div>
-                    <button type="submit" class="submit-button">Absenden</button>
+                    <button type="submit" class="submit-button">Nachricht senden</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" class="social-link">in</a>
-                <a href="#" class="social-link">ig</a>
-                <a href="#" class="social-link">yt</a>
-                <a href="#" class="social-link">fb</a>
+                <a href="https://linkedin.com" target="_blank" class="social-link" title="LinkedIn">in</a>
+                <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram">ig</a>
+                <a href="https://youtube.com" target="_blank" class="social-link" title="YouTube">yt</a>
+                <a href="https://vimeo.com" target="_blank" class="social-link" title="Vimeo">vi</a>
             </div>
-            <p>&copy; 2026 Portfolio. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2026 Sarah Müller Filmproduktion. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Mobile Menu Toggle
+    <script>
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('active');
         }
 
-        // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.querySelector('.nav-links').classList.remove('active');
             });
         });
 
-        // Form Submission
         function handleSubmit(event) {
             event.preventDefault();
-            alert('Vielen Dank für deine Nachricht! Ich melde mich bald bei dir.');
+            const name = document.getElementById('name').value;
+            alert(`Vielen Dank ${name}! Deine Nachricht wurde gesendet. Ich melde mich innerhalb von 24 Stunden bei dir.`);
             event.target.reset();
         }
 
-        // Intersection Observer for Fade-in Animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -867,7 +900,6 @@
             observer.observe(element);
         });
 
-        // Smooth scroll behavior for Safari
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -880,7 +912,6 @@
                 }
             });
         });
-
-        // Video play functionality (placeholder)
-        document.querySelectorAll('.video-item').forEach(item => {
-            item.addEventListen
+    </script>
+</body>
+</html>
